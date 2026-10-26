@@ -1,0 +1,402 @@
+---
+import { CLINIC_INFO, CATEGORIES, PROCEDURES } from '../data/clinicData';
+
+interface Props {
+  showMap?: boolean;
+  headingLevel?: 'h1' | 'h2';
+}
+
+const { showMap = true, headingLevel = 'h2' } = Astro.props;
+const HeadingTag = headingLevel;
+---
+
+<section id="contacto-whatsapp" class="w-full py-20 lg:py-28 bg-ivory border-t border-gold-border/60">
+  <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-16 items-start">
+      <!-- Left Column: Location, Medical Tourism & Direct Channels -->
+      <div class="lg:col-span-6 space-y-8" data-reveal>
+        <div class="space-y-3">
+          <span class="text-[10.5px] font-medium uppercase tracking-widecaps text-gold-deep block">
+            Colonia Maquilishuat · San Salvador
+          </span>
+          <HeadingTag class="text-[36px] sm:text-[48px] font-extralight leading-[1.06] tracking-[-0.025em] text-rose-dark">
+            Ubicación y Citas Médicas
+          </HeadingTag>
+          <p class="text-[15px] text-ink-muted leading-relaxed max-w-lg pt-1">
+            Ubicada en una de las zonas corporativas y residenciales más exclusivas y seguras de la capital salvadoreña. Todos nuestros tratamientos inician con una evaluación médica personalizada.
+          </p>
+        </div>
+
+        <!-- Primary Location Card -->
+        <div class="bg-ivory-pure border border-gold-border/80 p-7 sm:p-9 space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-3 pb-5 border-b border-gold-border/60">
+            <div>
+              <span class="text-[10px] font-medium uppercase tracking-editorial text-rose-old block">
+                Sede Principal · Desde 2012
+              </span>
+              <h3 class="text-[24px] font-light text-rose-dark mt-1">
+                San Salvador · Col. Maquilishuat
+              </h3>
+            </div>
+            <a
+              href={CLINIC_INFO.googleMapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-[10px] font-medium uppercase tracking-editorial text-rose-dark border-b border-gold-metallic pb-0.5 hover:text-gold-deep link-editorial self-start"
+            >
+              Abrir en Google Maps →
+            </a>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-[14px]">
+            <div class="space-y-1.5">
+              <span class="text-[10px] font-medium uppercase tracking-editorial text-gold-deep block">
+                Dirección Clínica
+              </span>
+              <p class="text-ink leading-relaxed">
+                Calle La Mascota #722,<br />
+                Colonia Maquilishuat,<br />
+                San Salvador, El Salvador.
+              </p>
+            </div>
+
+            <div class="space-y-3">
+              <div>
+                <span class="text-[10px] font-medium uppercase tracking-editorial text-gold-deep block">
+                  Teléfono Fijo
+                </span>
+                <a
+                  href={`tel:${CLINIC_INFO.phoneTel}`}
+                  class="text-[15px] font-normal text-rose-dark hover:text-gold-deep link-editorial mt-0.5 inline-block"
+                >
+                  {CLINIC_INFO.phoneDisplay}
+                </a>
+              </div>
+              <div>
+                <span class="text-[10px] font-medium uppercase tracking-editorial text-gold-deep block">
+                  WhatsApp de Citas
+                </span>
+                <div class="flex flex-col gap-1 mt-0.5">
+                  <a
+                    href={`https://wa.me/${CLINIC_INFO.whatsappPrimaryNumber}?text=Hola%20Rejuveness%20Center,%20deseo%20agendar%20una%20evaluaci%C3%B3n%20m%C3%A9dica.`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-[14.5px] text-rose-dark hover:text-gold-deep link-editorial"
+                  >
+                    {CLINIC_INFO.whatsappPrimaryDisplay} (Línea 1)
+                  </a>
+                  <a
+                    href={`https://wa.me/${CLINIC_INFO.whatsappSecondaryNumber}?text=Hola%20Rejuveness%20Center,%20deseo%20agendar%20una%20evaluaci%C3%B3n%20m%C3%A9dica.`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-[14.5px] text-rose-dark hover:text-gold-deep link-editorial"
+                  >
+                    {CLINIC_INFO.whatsappSecondaryDisplay} (Línea 2)
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Medical Tourism Notice -->
+          <div class="p-4 bg-rose-blush/55 border-l-2 border-gold-metallic text-[13.5px] text-ink leading-relaxed">
+            <strong class="font-medium text-rose-dark">Turismo Médico Internacional (Personal Bilingüe):</strong> Si nos visitas desde fuera de El Salvador, recomendamos coordinar tu cita vía WhatsApp con <span class="underline decoration-gold-metallic underline-offset-2">2 a 3 semanas de anticipación</span> para garantizar disponibilidad de agenda con la Dra. Ingrid Gómez.
+          </div>
+
+          <!-- Direct Action Buttons -->
+          <div class="pt-1 flex flex-wrap items-center gap-3.5">
+            <a
+              href={`https://wa.me/${CLINIC_INFO.whatsappPrimaryNumber}?text=Hola%20Rejuveness%20Center,%20deseo%20agendar%20mi%20evaluaci%C3%B3n%20m%C3%A9dica%20en%20Colonia%20Maquilishuat.`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-atelier inline-flex items-center justify-center px-6 py-3 bg-rose-dark text-ivory-pure text-[10px] font-medium uppercase tracking-editorial hover:bg-rose-old hover:text-rose-espresso"
+            >
+              WhatsApp +503 7930-0623
+            </a>
+            <a
+              href={`https://wa.me/${CLINIC_INFO.whatsappSecondaryNumber}?text=Hola%20Rejuveness%20Center,%20deseo%20agendar%20mi%20evaluaci%C3%B3n%20m%C3%A9dica%20en%20Colonia%20Maquilishuat.`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-atelier inline-flex items-center justify-center px-6 py-3 border border-rose-dark/40 text-rose-dark text-[10px] font-medium uppercase tracking-editorial hover:bg-rose-dark hover:text-ivory-pure"
+            >
+              WhatsApp +503 7938-2008
+            </a>
+          </div>
+        </div>
+
+        {showMap && (
+          <div class="border border-gold-border/80 bg-ivory-pure p-2">
+            <div class="relative w-full h-[230px] overflow-hidden bg-rose-blush/30">
+              <iframe
+                title="Ubicación de Rejuveness Center en Calle La Mascota #722, Colonia Maquilishuat, San Salvador"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=-89.2485%2C13.6885%2C-89.2285%2C13.7025&layer=mapnik&marker=13.6955%2C-89.2385"
+                class="w-full h-full border-0 grayscale contrast-105 opacity-90 hover:grayscale-0 transition-all duration-500"
+                loading="lazy"
+              ></iframe>
+              <div class="absolute bottom-3 left-3 bg-ivory-pure/95 backdrop-blur-sm px-4 py-2 border border-gold-border text-[11px] text-rose-dark">
+                <span class="font-medium text-gold-deep uppercase tracking-wider block text-[9.5px]">Zona Exclusiva y Segura</span>
+                Calle La Mascota #722 · Col. Maquilishuat
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <!-- Right Column: WhatsApp Connected Form -->
+      <div class="lg:col-span-6" data-reveal>
+        <form
+          id="whatsapp-contact-form"
+          data-whatsapp-form
+          class="bg-ivory-pure p-8 sm:p-12 border border-gold-border/85 space-y-6 shadow-[0_24px_60px_rgba(52,28,33,0.04)]"
+        >
+          <div class="space-y-2 pb-5 border-b border-gold-border/60">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-[10px] font-medium uppercase tracking-widecaps text-gold-deep block">
+                Conexión Directa a WhatsApp
+              </span>
+              <span class="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-rose-deep">
+                <span class="h-2 w-2 rounded-full bg-gold-metallic animate-pulse"></span>
+                Recepción Activa
+              </span>
+            </div>
+            <h3 class="text-[28px] sm:text-[34px] font-extralight text-rose-dark tracking-[-0.02em]">
+              Solicita tu Evaluación Médica
+            </h3>
+            <p class="text-[13.5px] text-ink-muted leading-relaxed">
+              Completa tus datos y el procedimiento de tu interés. Al enviar, se abrirá una conversación directa en nuestro WhatsApp oficial con tu solicitud lista.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label
+                for="wa-name"
+                class="block text-[10px] font-medium uppercase tracking-editorial text-ink-muted mb-2"
+              >
+                Nombre Completo *
+              </label>
+              <input
+                id="wa-name"
+                name="name"
+                type="text"
+                required
+                autocomplete="name"
+                placeholder="Ej. María Fernanda Henríquez"
+                class="w-full border-b border-gold-border bg-transparent py-2.5 text-[14.5px] text-rose-dark placeholder:text-ink-subtle/60 focus:border-gold-metallic focus:outline-none transition-colors"
+              />
+            </div>
+
+            <div>
+              <label
+                for="wa-phone"
+                class="block text-[10px] font-medium uppercase tracking-editorial text-ink-muted mb-2"
+              >
+                Teléfono / WhatsApp *
+              </label>
+              <input
+                id="wa-phone"
+                name="phone"
+                type="tel"
+                required
+                autocomplete="tel"
+                placeholder="Ej. +503 7000-0000"
+                class="w-full border-b border-gold-border bg-transparent py-2.5 text-[14.5px] text-rose-dark placeholder:text-ink-subtle/60 focus:border-gold-metallic focus:outline-none transition-colors"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label
+                for="wa-procedure"
+                class="block text-[10px] font-medium uppercase tracking-editorial text-ink-muted mb-2"
+              >
+                Procedimiento o Tratamiento *
+              </label>
+              <select
+                id="wa-procedure"
+                name="procedure"
+                required
+                class="w-full border-b border-gold-border bg-ivory-pure py-2.5 text-[14px] text-rose-dark focus:border-gold-metallic focus:outline-none transition-colors"
+              >
+                <option value="Evaluación Médica General con Dra. Ingrid Gómez">
+                  Evaluación Médica Personalizada (Recomendado)
+                </option>
+                {CATEGORIES.map((cat) => (
+                  <optgroup label={cat.title}>
+                    {PROCEDURES.filter((p) => p.categorySlug === cat.slug).map((proc) => (
+                      <option value={`${proc.name} (${cat.shortLabel})`}>
+                        {proc.name}
+                      </option>
+                    ))}
+                  </optgroup>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label
+                for="wa-patient-type"
+                class="block text-[10px] font-medium uppercase tracking-editorial text-ink-muted mb-2"
+              >
+                Modalidad de Paciente
+              </label>
+              <select
+                id="wa-patient-type"
+                name="patientType"
+                class="w-full border-b border-gold-border bg-ivory-pure py-2.5 text-[14px] text-rose-dark focus:border-gold-metallic focus:outline-none transition-colors"
+              >
+                <option value="Paciente Local (El Salvador)">
+                  Residente en El Salvador
+                </option>
+                <option value="Turismo Médico Internacional (Viajo del extranjero)">
+                  Turismo Médico (Viajo desde el extranjero)
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label
+                for="wa-schedule"
+                class="block text-[10px] font-medium uppercase tracking-editorial text-ink-muted mb-2"
+              >
+                Fecha u Horario Preferido
+              </label>
+              <input
+                id="wa-schedule"
+                name="schedule"
+                type="text"
+                placeholder="Ej. Esta semana por la mañana / Próximo mes"
+                class="w-full border-b border-gold-border bg-transparent py-2.5 text-[14.5px] text-rose-dark placeholder:text-ink-subtle/60 focus:border-gold-metallic focus:outline-none transition-colors"
+              />
+            </div>
+
+            <div>
+              <label
+                for="wa-line"
+                class="block text-[10px] font-medium uppercase tracking-editorial text-ink-muted mb-2"
+              >
+                Línea de WhatsApp Destino
+              </label>
+              <select
+                id="wa-line"
+                name="line"
+                class="w-full border-b border-gold-border bg-ivory-pure py-2.5 text-[14px] text-rose-dark focus:border-gold-metallic focus:outline-none transition-colors"
+              >
+                <option value="50379300623">Citas Línea 1 (+503 7930-0623)</option>
+                <option value="50379382008">Citas Línea 2 (+503 7938-2008)</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label
+              for="wa-notes"
+              class="block text-[10px] font-medium uppercase tracking-editorial text-ink-muted mb-2"
+            >
+              Consulta o Necesidad Específica (Opcional)
+            </label>
+            <textarea
+              id="wa-notes"
+              name="notes"
+              rows="2"
+              placeholder="Cuéntanos qué zona facial o corporal deseas mejorar o si tienes alguna duda médica..."
+              class="w-full border-b border-gold-border bg-transparent py-2 text-[14.5px] text-rose-dark placeholder:text-ink-subtle/60 focus:border-gold-metallic focus:outline-none transition-colors resize-none"
+            ></textarea>
+          </div>
+
+          <div class="pt-3 space-y-3">
+            <button
+              type="submit"
+              class="btn-atelier w-full inline-flex items-center justify-center gap-3 bg-rose-dark px-8 py-4 text-[10.5px] font-medium uppercase tracking-editorial text-ivory-pure hover:bg-gold-metallic hover:text-rose-espresso focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-metallic"
+            >
+              <span>Enviar Solicitud a WhatsApp</span>
+              <span aria-hidden="true">→</span>
+            </button>
+
+            <p class="text-[11.5px] text-ink-muted text-center">
+              Al hacer clic se abrirá WhatsApp hacia <span class="text-rose-dark font-medium">+503 7930-0623</span> / <span class="text-rose-dark font-medium">+503 7938-2008</span>.
+            </p>
+          </div>
+
+          <!-- Feedback Banner after submit -->
+          <div
+            data-wa-feedback
+            class="hidden p-4 bg-rose-blush/80 border border-gold-metallic text-[13px] text-rose-dark space-y-2"
+            role="status"
+            aria-live="polite"
+          >
+            <p class="font-medium">
+              ¡Solicitud generada correctamente! Hemos abierto WhatsApp con tu mensaje.
+            </p>
+            <p class="text-ink-muted">
+              Si la ventana emergente no se abrió automáticamente, haz clic aquí:
+              <a
+                data-wa-fallback-link
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="underline font-medium text-rose-dark ml-1"
+              >
+                Abrir conversación en WhatsApp →
+              </a>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initWhatsAppForms() {
+    const forms = document.querySelectorAll('[data-whatsapp-form]');
+    forms.forEach((form) => {
+      if (form.getAttribute('data-bound') === 'true') return;
+      form.setAttribute('data-bound', 'true');
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(form as HTMLFormElement);
+        const name = (formData.get('name') || '').toString().trim();
+        const phone = (formData.get('phone') || '').toString().trim();
+        const procedure = (formData.get('procedure') || 'Evaluación Médica').toString().trim();
+        const patientType = (formData.get('patientType') || 'Paciente Local').toString().trim();
+        const schedule = (formData.get('schedule') || 'Por coordinar').toString().trim();
+        const line = (formData.get('line') || '50379300623').toString().trim();
+        const notes = (formData.get('notes') || '').toString().trim();
+
+        const messageLines = [
+          'Hola *REJUVENESS CENTER*, deseo agendar una cita / evaluación médica:',
+          '',
+          `• *Nombre:* ${name}`,
+          `• *Teléfono:* ${phone}`,
+          `• *Tratamiento de interés:* ${procedure}`,
+          `• *Modalidad:* ${patientType}`,
+          `• *Horario preferido:* ${schedule || 'Por coordinar'}`,
+        ];
+
+        if (notes) {
+          messageLines.push(`• *Comentarios:* ${notes}`);
+        }
+
+        const encoded = encodeURIComponent(messageLines.join('\n'));
+        const waUrl = `https://wa.me/${line}?text=${encoded}`;
+
+        const feedback = form.querySelector('[data-wa-feedback]');
+        const fallbackLink = form.querySelector('[data-wa-fallback-link]') as HTMLAnchorElement | null;
+        if (feedback && fallbackLink) {
+          fallbackLink.href = waUrl;
+          feedback.classList.remove('hidden');
+        }
+
+        window.open(waUrl, '_blank', 'noopener,noreferrer');
+      });
+    });
+  }
+
+  initWhatsAppForms();
+  document.addEventListener('astro:page-load', initWhatsAppForms);
+</script>

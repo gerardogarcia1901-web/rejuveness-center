@@ -1,0 +1,192 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { CATEGORIES, PROCEDURES } from '../data/clinicData';
+---
+
+<BaseLayout
+  title="Procedimientos y Tratamientos · REJUVENESS CENTER San Salvador"
+  description="Menú de procedimientos médicos estéticos no quirúrgicos en Rejuveness Center: Armonización Orofacial, Regeneración Celular, Aparatología Facial y Moldeo Corporal."
+  currentPath="/procedimientos"
+>
+  <!-- 1. EDITORIAL HEADER -->
+  <section class="w-full pt-14 pb-12 lg:py-20 bg-ivory text-center">
+    <div class="max-w-3xl mx-auto px-6 space-y-4" data-reveal>
+      <span class="text-[10.5px] font-medium uppercase tracking-widecaps text-gold-deep block">
+        Protocolos No Quirúrgicos · Supervisión Médica
+      </span>
+      <h1 class="text-[44px] sm:text-[66px] lg:text-[80px] font-extralight leading-[0.98] tracking-[-0.03em] text-rose-dark">
+        Procedimientos
+      </h1>
+      <p class="text-[15px] text-ink-muted max-w-xl mx-auto pt-1 leading-relaxed">
+        Selecciona cualquier tratamiento para conocer en detalle qué incluye la sesión y el proceso clínico paso a paso.
+      </p>
+    </div>
+  </section>
+
+  <!-- 2. STICKY CATEGORY FILTER BAR -->
+  <div class="sticky top-20 z-30 bg-ivory-pure/95 backdrop-blur-md border-y border-gold-border/80">
+    <div class="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 py-4 flex items-center justify-between gap-4 overflow-x-auto no-scrollbar">
+      <div
+        class="flex items-center gap-2 min-w-max"
+        role="tablist"
+        aria-label="Filtrar procedimientos por categoría médica"
+        data-proc-tabs
+      >
+        <button
+          type="button"
+          role="tab"
+          aria-selected="true"
+          data-filter-btn="todos"
+          class="btn-atelier px-5 py-2.5 text-[10px] font-medium uppercase tracking-[0.22em] bg-rose-dark text-ivory-pure"
+        >
+          Todos (16)
+        </button>
+        {CATEGORIES.map((cat) => (
+          <button
+            type="button"
+            role="tab"
+            aria-selected="false"
+            data-filter-btn={cat.slug}
+            class="btn-atelier px-5 py-2.5 text-[10px] font-medium uppercase tracking-[0.22em] bg-transparent text-ink-muted hover:text-rose-dark hover:bg-rose-blush/50"
+          >
+            {cat.shortLabel} ({cat.count})
+          </button>
+        ))}
+      </div>
+
+      <span class="hidden xl:inline-block text-[10px] uppercase tracking-[0.24em] text-gold-deep shrink-0">
+        Dra. Ingrid Gómez · Col. Maquilishuat
+      </span>
+    </div>
+  </div>
+
+  <!-- 3. CLEAN, IMAGE-FIRST GRID OF ALL 16 PROCEDURES -->
+  <section class="w-full py-14 lg:py-22 bg-ivory-pure">
+    <div class="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 space-y-18">
+      {CATEGORIES.map((cat, catIdx) => {
+        const items = PROCEDURES.filter((p) => p.categorySlug === cat.slug);
+        return (
+          <div
+            data-category-section={cat.slug}
+            class="space-y-8 pt-6 first:pt-0"
+          >
+            <!-- Minimal Category Header -->
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-5 border-b border-gold-border/75">
+              <div>
+                <span class="text-[10px] font-medium uppercase tracking-widecaps text-gold-deep block mb-1">
+                  0{catIdx + 1} · {cat.specialistNote}
+                </span>
+                <h2 class="text-[26px] sm:text-[34px] font-extralight text-rose-dark tracking-[-0.02em]">
+                  {cat.title}
+                </h2>
+              </div>
+              <span class="text-[11px] uppercase tracking-[0.22em] text-ink-muted">
+                {cat.count} Procedimientos
+              </span>
+            </div>
+
+            <!-- Concise Procedure Cards Linking to /procedimientos/[id] -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+              {items.map((proc) => (
+                <a
+                  href={`/procedimientos/${proc.id}`}
+                  class="group flex flex-col justify-between bg-ivory border border-gold-border/70 hover:border-gold-metallic transition-colors overflow-hidden"
+                >
+                  <div>
+                    <!-- Tall Portrait Image -->
+                    <div class="relative h-[380px] sm:h-[420px] w-full overflow-hidden bg-rose-blush">
+                      <img
+                        src={proc.image}
+                        alt={proc.name}
+                        width="700"
+                        height="860"
+                        loading="lazy"
+                        class="w-full h-full object-cover object-center portrait-zoom"
+                      />
+                      <div class="absolute inset-0 bg-gradient-to-t from-rose-espresso/60 via-transparent to-transparent"></div>
+
+                      <div class="absolute top-4 inset-x-4 flex items-center justify-between text-[9.5px] uppercase tracking-[0.22em] text-ivory-pure/95">
+                        <span class="bg-rose-dark/65 backdrop-blur-sm px-3 py-1">
+                          {proc.categoryName}
+                        </span>
+                        <span class="bg-rose-dark/65 backdrop-blur-sm px-3 py-1">
+                          {proc.duration}
+                        </span>
+                      </div>
+                    </div>
+
+                    <!-- Concise Title & 1-Sentence Summary -->
+                    <div class="p-6 space-y-2">
+                      <h3 class="text-[20px] font-light text-rose-dark group-hover:text-rose-deep transition-colors leading-snug">
+                        {proc.name}
+                      </h3>
+                      <p class="text-[13.5px] text-ink-muted leading-relaxed line-clamp-2">
+                        {proc.summary}
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- Bottom Link Bar -->
+                  <div class="px-6 pb-6 pt-1">
+                    <span class="btn-atelier w-full py-3 bg-ivory-pure border border-rose-dark/80 text-[10px] font-medium uppercase tracking-[0.24em] text-rose-dark group-hover:bg-rose-dark group-hover:text-ivory-pure flex items-center justify-center gap-2">
+                      <span>Ver Procedimiento</span>
+                      <span aria-hidden="true" class="group-hover:translate-x-1 transition-transform">→</span>
+                    </span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  function initProceduresFilter() {
+    const buttons = document.querySelectorAll('[data-filter-btn]');
+    const sections = document.querySelectorAll('[data-category-section]');
+    if (!buttons.length || !sections.length) return;
+
+    function applyFilter(category: string) {
+      buttons.forEach((btn) => {
+        const val = btn.getAttribute('data-filter-btn');
+        const active = val === category;
+        btn.setAttribute('aria-selected', active ? 'true' : 'false');
+        if (active) {
+          btn.classList.add('bg-rose-dark', 'text-ivory-pure');
+          btn.classList.remove('bg-transparent', 'text-ink-muted');
+        } else {
+          btn.classList.remove('bg-rose-dark', 'text-ivory-pure');
+          btn.classList.add('bg-transparent', 'text-ink-muted');
+        }
+      });
+
+      sections.forEach((sec) => {
+        const secCat = sec.getAttribute('data-category-section');
+        if (category === 'todos' || secCat === category) {
+          (sec as HTMLElement).style.display = 'block';
+        } else {
+          (sec as HTMLElement).style.display = 'none';
+        }
+      });
+    }
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const cat = btn.getAttribute('data-filter-btn') || 'todos';
+        applyFilter(cat);
+      });
+    });
+
+    const params = new URLSearchParams(window.location.search);
+    const paramCat = params.get('categoria') || params.get('zona');
+    if (paramCat) {
+      applyFilter(paramCat);
+    }
+  }
+
+  initProceduresFilter();
+  document.addEventListener('astro:page-load', initProceduresFilter);
+</script>

@@ -1,0 +1,241 @@
+---
+import { CLINIC_INFO, CATEGORIES, PROCEDURES } from '../data/clinicData';
+---
+
+<div
+  id="booking-modal"
+  class="fixed inset-0 z-[90] hidden items-center justify-center p-4 sm:p-6 bg-rose-espresso/60 backdrop-blur-sm opacity-0 transition-opacity duration-300"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="booking-modal-title"
+>
+  <div
+    class="relative w-full max-w-lg bg-ivory-pure border border-gold-border p-7 sm:p-10 shadow-2xl transform translate-y-3 transition-transform duration-300 max-h-[92vh] overflow-y-auto"
+    data-modal-panel
+  >
+    <button
+      type="button"
+      data-close-booking
+      aria-label="Cerrar ventana de agendamiento"
+      class="absolute top-5 right-5 h-9 w-9 flex items-center justify-center border border-gold-border/80 text-rose-dark hover:bg-rose-dark hover:text-ivory-pure transition-colors"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <div class="space-y-2 pb-5 border-b border-gold-border/60 pr-8">
+      <span class="text-[10px] font-medium uppercase tracking-widecaps text-gold-deep block">
+        Dra. Ingrid Gómez · Col. Maquilishuat
+      </span>
+      <h2 id="booking-modal-title" class="text-[28px] font-extralight text-rose-dark tracking-[-0.02em]">
+        Agendar Cita por WhatsApp
+      </h2>
+      <p class="text-[13px] text-ink-muted leading-relaxed">
+        Coordina tu evaluación médica personalizada directamente con nuestra recepción en San Salvador.
+      </p>
+    </div>
+
+    <form id="modal-whatsapp-form" class="space-y-5 pt-5">
+      <div>
+        <label for="modal-name" class="block text-[10px] font-medium uppercase tracking-editorial text-ink-muted mb-1.5">
+          Nombre Completo *
+        </label>
+        <input
+          id="modal-name"
+          name="name"
+          type="text"
+          required
+          placeholder="Tu nombre y apellido"
+          class="w-full border-b border-gold-border bg-transparent py-2 text-[14.5px] text-rose-dark placeholder:text-ink-subtle/60 focus:border-gold-metallic focus:outline-none"
+        />
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div>
+          <label for="modal-phone" class="block text-[10px] font-medium uppercase tracking-editorial text-ink-muted mb-1.5">
+            Teléfono / WhatsApp *
+          </label>
+          <input
+            id="modal-phone"
+            name="phone"
+            type="tel"
+            required
+            placeholder="+503 7000-0000"
+            class="w-full border-b border-gold-border bg-transparent py-2 text-[14.5px] text-rose-dark placeholder:text-ink-subtle/60 focus:border-gold-metallic focus:outline-none"
+          />
+        </div>
+
+        <div>
+          <label for="modal-origin" class="block text-[10px] font-medium uppercase tracking-editorial text-ink-muted mb-1.5">
+            Ubicación del Paciente
+          </label>
+          <select
+            id="modal-origin"
+            name="origin"
+            class="w-full border-b border-gold-border bg-ivory-pure py-2 text-[14px] text-rose-dark focus:border-gold-metallic focus:outline-none"
+          >
+            <option value="El Salvador">El Salvador (Local)</option>
+            <option value="Turismo Médico Internacional">Extranjero (Turismo Médico)</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <label for="modal-procedure" class="block text-[10px] font-medium uppercase tracking-editorial text-ink-muted mb-1.5">
+          Procedimiento de Interés *
+        </label>
+        <select
+          id="modal-procedure"
+          name="procedure"
+          class="w-full border-b border-gold-border bg-ivory-pure py-2 text-[14px] text-rose-dark focus:border-gold-metallic focus:outline-none"
+        >
+          <option value="Evaluación Médica Personalizada">Evaluación Médica Personalizada</option>
+          {CATEGORIES.map((cat) => (
+            <optgroup label={cat.title}>
+              {PROCEDURES.filter((p) => p.categorySlug === cat.slug).map((proc) => (
+                <option value={proc.name}>{proc.name}</option>
+              ))}
+            </optgroup>
+          ))}
+        </select>
+      </div>
+
+      <div>
+        <label for="modal-notes" class="block text-[10px] font-medium uppercase tracking-editorial text-ink-muted mb-1.5">
+          Horario Preferido o Comentarios (Opcional)
+        </label>
+        <input
+          id="modal-notes"
+          name="notes"
+          type="text"
+          placeholder="Ej. Por la tarde / Viajo en 3 semanas"
+          class="w-full border-b border-gold-border bg-transparent py-2 text-[14.5px] text-rose-dark placeholder:text-ink-subtle/60 focus:border-gold-metallic focus:outline-none"
+        />
+      </div>
+
+      <div class="pt-2 space-y-3">
+        <button
+          type="submit"
+          class="btn-atelier w-full inline-flex items-center justify-center gap-2 bg-rose-dark px-7 py-3.5 text-[10.5px] font-medium uppercase tracking-editorial text-ivory-pure hover:bg-gold-metallic hover:text-rose-espresso"
+        >
+          <span>Confirmar por WhatsApp (+503 7930-0623)</span>
+          <span aria-hidden="true">→</span>
+        </button>
+
+        <div class="flex items-center justify-between text-[11px] text-ink-muted pt-1">
+          <span>Tel. Fijo: {CLINIC_INFO.phoneDisplay}</span>
+          <a
+            href={`https://wa.me/${CLINIC_INFO.whatsappSecondaryNumber}?text=Hola%20Rejuveness%20Center,%20deseo%20informaci%C3%B3n%20sobre%20evaluaci%C3%B3n%20m%C3%A9dica.`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline hover:text-rose-dark"
+          >
+            Línea Alterna: {CLINIC_INFO.whatsappSecondaryDisplay}
+          </a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  function setupBookingModal() {
+    const modal = document.getElementById('booking-modal');
+    const panel = modal?.querySelector('[data-modal-panel]');
+    const procedureSelect = document.getElementById('modal-procedure') as HTMLSelectElement | null;
+    const form = document.getElementById('modal-whatsapp-form') as HTMLFormElement | null;
+
+    if (!modal || !panel) return;
+
+    function openModal(preselectedProcedure?: string) {
+      if (preselectedProcedure && procedureSelect) {
+        let matched = false;
+        for (const opt of Array.from(procedureSelect.options)) {
+          if (
+            opt.value.toLowerCase().includes(preselectedProcedure.toLowerCase()) ||
+            preselectedProcedure.toLowerCase().includes(opt.value.toLowerCase())
+          ) {
+            procedureSelect.value = opt.value;
+            matched = true;
+            break;
+          }
+        }
+        if (!matched) {
+          procedureSelect.value = 'Evaluación Médica Personalizada';
+        }
+      }
+      modal!.classList.remove('hidden');
+      modal!.classList.add('flex');
+      requestAnimationFrame(() => {
+        modal!.classList.remove('opacity-0');
+        panel!.classList.remove('translate-y-3');
+      });
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal!.classList.add('opacity-0');
+      panel!.classList.add('translate-y-3');
+      setTimeout(() => {
+        modal!.classList.add('hidden');
+        modal!.classList.remove('flex');
+        document.body.style.overflow = '';
+      }, 250);
+    }
+
+    document.querySelectorAll('[data-open-booking]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const proc = btn.getAttribute('data-procedure') || undefined;
+        openModal(proc);
+      });
+    });
+
+    document.querySelectorAll('[data-close-booking]').forEach((btn) => {
+      btn.addEventListener('click', closeModal);
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        closeModal();
+      }
+    });
+
+    if (form && form.getAttribute('data-bound') !== 'true') {
+      form.setAttribute('data-bound', 'true');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const fd = new FormData(form);
+        const name = (fd.get('name') || '').toString().trim();
+        const phone = (fd.get('phone') || '').toString().trim();
+        const origin = (fd.get('origin') || 'El Salvador').toString().trim();
+        const procedure = (fd.get('procedure') || 'Evaluación Médica Personalizada').toString().trim();
+        const notes = (fd.get('notes') || '').toString().trim();
+
+        const msg = [
+          'Hola *REJUVENESS CENTER*, deseo agendar una cita médica:',
+          '',
+          `• *Nombre:* ${name}`,
+          `• *Teléfono:* ${phone}`,
+          `• *Procedimiento:* ${procedure}`,
+          `• *Paciente:* ${origin}`,
+          notes ? `• *Detalles:* ${notes}` : '',
+        ]
+          .filter(Boolean)
+          .join('\n');
+
+        const url = `https://wa.me/50379300623?text=${encodeURIComponent(msg)}`;
+        window.open(url, '_blank', 'noopener,noreferrer');
+        closeModal();
+      });
+    }
+  }
+
+  setupBookingModal();
+  document.addEventListener('astro:page-load', setupBookingModal);
+</script>

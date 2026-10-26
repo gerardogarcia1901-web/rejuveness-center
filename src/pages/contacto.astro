@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactFormSection from '../components/ContactFormSection.astro';
+import { CLINIC_INFO } from '../data/clinicData';
+---
+
+<BaseLayout
+  title="Contacto, Ubicación & Citas · REJUVENESS CENTER San Salvador"
+  description="Agenda tu cita médica en Rejuveness Center: Calle La Mascota #722, Colonia Maquilishuat, San Salvador. Teléfono fijo +503 2264-7018 y WhatsApp +503 7930-0623 / +503 7938-2008."
+  currentPath="/contacto"
+>
+  <!-- 1. MAIN CONTACT & WHATSAPP FORM SECTION -->
+  <ContactFormSection showMap={true} headingLevel="h1" />
+
+  <!-- 2. DIRECT CHANNELS & MEDICAL TOURISM CONCIERGE CARDS -->
+  <section class="w-full py-16 lg:py-22 bg-ivory-pure border-t border-gold-border/60">
+    <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-7">
+        <!-- Card 1: WhatsApp Lines -->
+        <div class="p-8 bg-ivory border border-gold-border/80 flex flex-col justify-between space-y-6" data-reveal>
+          <div class="space-y-2.5">
+            <span class="text-[10px] font-medium uppercase tracking-editorial text-gold-deep block">
+              Atención Inmediata
+            </span>
+            <h2 class="text-[24px] font-light text-rose-dark">
+              WhatsApp de Citas
+            </h2>
+            <p class="text-[13.5px] text-ink-muted leading-relaxed">
+              Escríbenos directamente a cualquiera de nuestras dos líneas oficiales para consultar disponibilidad de agenda con la Dra. Ingrid Gómez.
+            </p>
+          </div>
+          <div class="space-y-2.5 pt-2">
+            <a
+              href={`https://wa.me/${CLINIC_INFO.whatsappPrimaryNumber}?text=Hola%20Rejuveness%20Center,%20deseo%20informaci%C3%B3n%20para%20agendar%20cita.`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-atelier w-full inline-flex items-center justify-between px-5 py-3 bg-rose-dark text-ivory-pure text-[10px] font-medium uppercase tracking-editorial hover:bg-gold-metallic hover:text-rose-espresso"
+            >
+              <span>Línea 1: {CLINIC_INFO.whatsappPrimaryDisplay}</span>
+              <span>→</span>
+            </a>
+            <a
+              href={`https://wa.me/${CLINIC_INFO.whatsappSecondaryNumber}?text=Hola%20Rejuveness%20Center,%20deseo%20informaci%C3%B3n%20para%20agendar%20cita.`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-atelier w-full inline-flex items-center justify-between px-5 py-3 border border-rose-dark text-rose-dark text-[10px] font-medium uppercase tracking-editorial hover:bg-rose-dark hover:text-ivory-pure"
+            >
+              <span>Línea 2: {CLINIC_INFO.whatsappSecondaryDisplay}</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 2: Landline & Address -->
+        <div class="p-8 bg-ivory border border-gold-border/80 flex flex-col justify-between space-y-6" data-reveal>
+          <div class="space-y-2.5">
+            <span class="text-[10px] font-medium uppercase tracking-editorial text-gold-deep block">
+              Recepción Clínica
+            </span>
+            <h2 class="text-[24px] font-light text-rose-dark">
+              Teléfono Fijo y Ubicación
+            </h2>
+            <p class="text-[13.5px] text-ink-muted leading-relaxed">
+              Calle La Mascota #722, Colonia Maquilishuat, San Salvador, El Salvador. Zona exclusiva, segura y de fácil acceso.
+            </p>
+          </div>
+          <div class="space-y-2.5 pt-2">
+            <a
+              href={`tel:${CLINIC_INFO.phoneTel}`}
+              class="btn-atelier w-full inline-flex items-center justify-between px-5 py-3 bg-rose-blush text-rose-dark border border-gold-border text-[10px] font-medium uppercase tracking-editorial hover:bg-rose-dark hover:text-ivory-pure"
+            >
+              <span>Llamar al {CLINIC_INFO.phoneDisplay}</span>
+              <span>→</span>
+            </a>
+            <a
+              href={CLINIC_INFO.googleMapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-atelier w-full inline-flex items-center justify-between px-5 py-3 border border-gold-border text-ink-muted text-[10px] font-medium uppercase tracking-editorial hover:text-rose-dark hover:border-rose-dark"
+            >
+              <span>Cómo Llegar (Google Maps)</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 3: International Patients / Medical Tourism -->
+        <div class="p-8 bg-rose-blush/55 border border-gold-metallic/60 flex flex-col justify-between space-y-6" data-reveal>
+          <div class="space-y-2.5">
+            <span class="text-[10px] font-medium uppercase tracking-editorial text-gold-deep block">
+              Pacientes del Extranjero
+            </span>
+            <h2 class="text-[24px] font-light text-rose-dark">
+              Turismo Médico Bilingüe
+            </h2>
+            <p class="text-[13.5px] text-ink-muted leading-relaxed">
+              Contamos con personal bilingüe para pacientes internacionales. Coordina tu cita con <strong class="font-medium text-rose-dark">2 a 3 semanas de anticipación</strong> para asegurar tus sesiones durante tu estadía en El Salvador.
+            </p>
+          </div>
+          <div class="pt-2">
+            <a
+              href={`https://wa.me/${CLINIC_INFO.whatsappPrimaryNumber}?text=Hola%20Rejuveness%20Center,%20viajo%20desde%20el%20extranjero%20y%20deseo%20coordinar%20mi%20cita%20de%20Turismo%20M%C3%A9dico%20con%20anticipaci%C3%B3n.`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-atelier w-full inline-flex items-center justify-between px-5 py-3.5 bg-rose-dark text-ivory-pure text-[10px] font-medium uppercase tracking-editorial hover:bg-gold-metallic hover:text-rose-espresso"
+            >
+              <span>Coordinar Turismo Médico</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

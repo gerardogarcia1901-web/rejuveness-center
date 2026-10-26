@@ -1,0 +1,305 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { CLINIC_INFO, CLINICAL_CASES } from '../data/clinicData';
+---
+
+<BaseLayout
+  title="Resultados Clínicos & Casos de Éxito · REJUVENESS CENTER San Salvador"
+  description="Explora casos clínicos de armonización orofacial, regeneración celular con ADN de Salmón (PDRN) y Exosomas, lifting HIFU y moldeo corporal en Rejuveness Center."
+  currentPath="/resultados"
+>
+  <!-- 1. EDITORIAL HEADER & INTERACTIVE CASES VIEWER -->
+  <section class="w-full py-16 lg:py-24 bg-ivory">
+    <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-14" data-reveal>
+        <div class="space-y-3 max-w-2xl">
+          <span class="text-[10.5px] font-medium text-gold-deep uppercase tracking-widecaps block">
+            Documentación Clínica · Armonía Natural
+          </span>
+          <h1 class="text-[42px] sm:text-[64px] font-extralight leading-[0.98] text-rose-dark tracking-[-0.03em]">
+            Resultados Reales
+          </h1>
+          <p class="text-[15px] text-ink-muted leading-relaxed pt-1">
+            Desliza cada comparador clínico (Antes / Después) para observar la evolución en calidad cutánea, luminosidad y armonía anatómica lograda sin rasgos artificiales.
+          </p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div
+          class="flex items-center gap-2 overflow-x-auto no-scrollbar"
+          role="tablist"
+          aria-label="Filtrar casos clínicos"
+        >
+          <button
+            type="button"
+            role="tab"
+            aria-selected="true"
+            data-case-filter="Todos"
+            class="btn-atelier px-5 py-2.5 text-[10px] font-medium uppercase tracking-[0.22em] whitespace-nowrap bg-rose-dark text-ivory-pure"
+          >
+            Todos (6)
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected="false"
+            data-case-filter="Armonización Orofacial"
+            class="btn-atelier px-5 py-2.5 text-[10px] font-medium uppercase tracking-[0.22em] whitespace-nowrap bg-rose-blush/70 text-ink-muted hover:text-rose-dark"
+          >
+            Armonización
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected="false"
+            data-case-filter="Regeneración Celular"
+            class="btn-atelier px-5 py-2.5 text-[10px] font-medium uppercase tracking-[0.22em] whitespace-nowrap bg-rose-blush/70 text-ink-muted hover:text-rose-dark"
+          >
+            Regeneración
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected="false"
+            data-case-filter="Aparatología Facial"
+            class="btn-atelier px-5 py-2.5 text-[10px] font-medium uppercase tracking-[0.22em] whitespace-nowrap bg-rose-blush/70 text-ink-muted hover:text-rose-dark"
+          >
+            Aparatología
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected="false"
+            data-case-filter="Moldeo Corporal"
+            class="btn-atelier px-5 py-2.5 text-[10px] font-medium uppercase tracking-[0.22em] whitespace-nowrap bg-rose-blush/70 text-ink-muted hover:text-rose-dark"
+          >
+            Corporal
+          </button>
+        </div>
+      </div>
+
+      <!-- Interactive Comparison Cards Grid (6 Aligned Before/After Cases) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        {CLINICAL_CASES.map((item) => (
+          <article
+            data-case-card={item.category}
+            class="group flex flex-col justify-between bg-ivory-pure border border-gold-border/80 p-6 sm:p-8"
+          >
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4 text-[10px] uppercase tracking-[0.22em] text-ink-muted">
+                <span>{item.category} · {item.sessions}</span>
+                <span class="text-gold-deep font-medium">Col. Maquilishuat</span>
+              </div>
+
+              <!-- Interactive Split Image Slider (1:1 Aligned Before & After) -->
+              <div
+                data-comparison-slider
+                class="relative w-full aspect-[4/3] overflow-hidden bg-rose-blush mb-6 select-none cursor-ew-resize"
+              >
+                <!-- After Image (Full Layer) -->
+                <img
+                  src={item.afterImage}
+                  alt={`Después del protocolo ${item.title} en Rejuveness Center`}
+                  width="800"
+                  height="620"
+                  loading="lazy"
+                  class="w-full h-full object-cover object-center pointer-events-none"
+                />
+                <div class="absolute bottom-4 right-4 px-3.5 py-1.5 bg-ivory-pure/95 backdrop-blur-sm text-rose-dark text-[9.5px] font-medium uppercase tracking-[0.2em] pointer-events-none border border-gold-border/60">
+                  DESPUÉS · RESULTADO
+                </div>
+
+                <!-- Before Layer (Exact Same Crop & Alignment, Clipped) -->
+                <div
+                  data-before-clip
+                  style="clip-path: inset(0 50% 0 0);"
+                  class="absolute inset-0 w-full h-full overflow-hidden pointer-events-none"
+                >
+                  <img
+                    src={item.beforeImage}
+                    alt={`Antes del protocolo ${item.title}`}
+                    width="800"
+                    height="620"
+                    loading="lazy"
+                    class="w-full h-full object-cover object-center"
+                  />
+                  <div class="absolute bottom-4 left-4 px-3.5 py-1.5 bg-rose-dark/85 backdrop-blur-sm text-ivory-pure text-[9.5px] font-medium uppercase tracking-[0.2em]">
+                    ANTES · EVALUACIÓN
+                  </div>
+                </div>
+
+                <!-- Divider Handle -->
+                <div
+                  data-slider-handle
+                  style="left: 50%;"
+                  class="absolute inset-y-0 w-[1.5px] bg-ivory-pure shadow-[0_0_12px_rgba(0,0,0,0.25)] pointer-events-none"
+                >
+                  <div class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-ivory-pure text-rose-dark border border-gold-metallic flex items-center justify-center shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gold-deep">
+                      <path d="m18 8 4 4-4 4"></path>
+                      <path d="M2 12h20"></path>
+                      <path d="m6 8-4 4 4 4"></path>
+                    </svg>
+                  </div>
+                </div>
+
+                <input
+                  type="range"
+                  min="5"
+                  max="95"
+                  value="50"
+                  aria-label={`Comparar antes y después para ${item.title}`}
+                  data-slider-input
+                  class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-20"
+                />
+              </div>
+
+              <span class="text-[10px] font-medium uppercase tracking-[0.22em] text-rose-old block mb-1">
+                {item.protocol}
+              </span>
+              <h2 class="text-[22px] font-light text-rose-dark leading-snug">
+                {item.title}
+              </h2>
+              <p class="text-[13.5px] text-ink-muted mt-2 leading-relaxed">
+                {item.outcome}
+              </p>
+            </div>
+
+            <div class="pt-5 mt-5 border-t border-gold-border/60 flex items-center justify-between text-[10px] uppercase tracking-[0.2em]">
+              <span class="text-gold-deep font-medium">{item.metric}</span>
+              <span class="text-ink-muted">{item.specialist}</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. PROGRESIÓN BIOLÓGICA & REDES OFICIALES -->
+  <section class="w-full py-20 lg:py-24 bg-ivory-pure border-t border-gold-border/70">
+    <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gold-border/70 border-y border-gold-border/70">
+        <div class="py-10 md:pr-10 space-y-2.5" data-reveal>
+          <span class="text-[10px] font-medium uppercase tracking-[0.24em] text-gold-deep block">
+            Etapa 01 · Consulta Inicial
+          </span>
+          <h3 class="text-[22px] font-light text-rose-dark">
+            Evaluación Médica Personalizada
+          </h3>
+          <p class="text-[13.5px] text-ink-muted leading-relaxed">
+            Dictaminamos las necesidades anatómicas y celulares de tu piel para diseñar un protocolo a medida sin excesos.
+          </p>
+        </div>
+
+        <div class="py-10 md:px-10 space-y-2.5" data-reveal>
+          <span class="text-[10px] font-medium uppercase tracking-[0.24em] text-gold-deep block">
+            Etapa 02 · Primeros Días
+          </span>
+          <h3 class="text-[22px] font-light text-rose-dark">
+            Integración sin Incapacidad
+          </h3>
+          <p class="text-[13.5px] text-ink-muted leading-relaxed">
+            Retomas tus actividades cotidianas de inmediato mientras los activos médicos hidratan y suavizan los tejidos.
+          </p>
+        </div>
+
+        <div class="py-10 md:pl-10 space-y-2.5" data-reveal>
+          <span class="text-[10px] font-medium uppercase tracking-[0.24em] text-gold-deep block">
+            Etapa 03 · Semanas 3 a 12
+          </span>
+          <h3 class="text-[22px] font-light text-rose-dark">
+            Estímulo de Colágeno Propio
+          </h3>
+          <p class="text-[13.5px] text-ink-muted leading-relaxed">
+            La bioestimulación celular alcanza su máxima expresión, devolviendo firmeza, densidad y luminosidad natural.
+          </p>
+        </div>
+      </div>
+
+      <!-- Social Proof Banner -->
+      <div class="mt-14 p-8 sm:p-10 bg-rose-blush/55 border border-gold-border/80 flex flex-col md:flex-row items-start md:items-center justify-between gap-6" data-reveal>
+        <div class="space-y-1 max-w-xl">
+          <span class="text-[10px] font-medium uppercase tracking-editorial text-gold-deep block">
+            Casos Reales · Antes y Después
+          </span>
+          <h3 class="text-[20px] sm:text-[22px] font-light text-rose-dark">
+            Explora más casos documentados y promociones vigentes en nuestras redes oficiales
+          </h3>
+        </div>
+        <div class="flex flex-wrap items-center gap-4">
+          <a
+            href={CLINIC_INFO.instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-atelier px-7 py-3.5 bg-rose-dark text-ivory-pure text-[10px] font-medium uppercase tracking-[0.24em] hover:bg-gold-metallic hover:text-rose-espresso"
+          >
+            Instagram {CLINIC_INFO.instagramHandle}
+          </a>
+          <a
+            href={CLINIC_INFO.facebookUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-atelier px-7 py-3.5 border border-rose-dark text-rose-dark text-[10px] font-medium uppercase tracking-[0.24em] hover:bg-rose-dark hover:text-ivory-pure"
+          >
+            Facebook Oficial
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  function initResultsPage() {
+    const sliders = document.querySelectorAll('[data-comparison-slider]');
+    sliders.forEach((slider) => {
+      const input = slider.querySelector('[data-slider-input]') as HTMLInputElement | null;
+      const beforeClip = slider.querySelector('[data-before-clip]') as HTMLElement | null;
+      const handle = slider.querySelector('[data-slider-handle]') as HTMLElement | null;
+
+      if (!input || !beforeClip || !handle) return;
+
+      const updateSlider = (val: string) => {
+        const pct = Number(val);
+        beforeClip.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+        handle.style.left = `${pct}%`;
+      };
+
+      input.addEventListener('input', (e) => {
+        updateSlider((e.target as HTMLInputElement).value);
+      });
+    });
+
+    const filterBtns = document.querySelectorAll('[data-case-filter]');
+    const cards = document.querySelectorAll('[data-case-card]');
+
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const selected = btn.getAttribute('data-case-filter') || 'Todos';
+        filterBtns.forEach((b) => {
+          const isMatch = b.getAttribute('data-case-filter') === selected;
+          b.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+          if (isMatch) {
+            b.classList.add('bg-rose-dark', 'text-ivory-pure');
+            b.classList.remove('bg-rose-blush/70', 'text-ink-muted');
+          } else {
+            b.classList.remove('bg-rose-dark', 'text-ivory-pure');
+            b.classList.add('bg-rose-blush/70', 'text-ink-muted');
+          }
+        });
+
+        cards.forEach((card) => {
+          const cat = card.getAttribute('data-case-card');
+          if (selected === 'Todos' || cat === selected) {
+            (card as HTMLElement).style.display = 'flex';
+          } else {
+            (card as HTMLElement).style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  initResultsPage();
+  document.addEventListener('astro:page-load', initResultsPage);
+</script>

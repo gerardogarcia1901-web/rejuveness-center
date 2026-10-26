@@ -1,0 +1,343 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { PROCEDURES, CLINIC_INFO, type ProcedureItem } from '../../data/clinicData';
+
+export function getStaticPaths() {
+  return PROCEDURES.map((proc) => ({
+    params: { id: proc.id },
+    props: { proc },
+  }));
+}
+
+interface Props {
+  proc: ProcedureItem;
+}
+
+const { proc } = Astro.props;
+
+const relatedProcedures = PROCEDURES.filter(
+  (p) => p.categorySlug === proc.categorySlug && p.id !== proc.id
+).slice(0, 3);
+
+const fallbackRelated =
+  relatedProcedures.length >= 3
+    ? relatedProcedures
+    : [
+        ...relatedProcedures,
+        ...PROCEDURES.filter((p) => p.id !== proc.id && !relatedProcedures.includes(p)),
+      ].slice(0, 3);
+
+const waMessage = encodeURIComponent(
+  `Hola *REJUVENESS CENTER*, deseo agendar una evaluación médica para el procedimiento: *${proc.name}*.`
+);
+---
+
+<BaseLayout
+  title={`${proc.name} · Procedimientos · REJUVENESS CENTER`}
+  description={`${proc.summary} Conoce qué incluye el tratamiento y el proceso paso a paso en Rejuveness Center San Salvador.`}
+  currentPath="/procedimientos"
+>
+  <!-- 1. BREADCRUMB BAR -->
+  <div class="w-full bg-ivory border-b border-gold-border/60 py-4">
+    <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12 flex flex-wrap items-center justify-between gap-4 text-[10.5px] uppercase tracking-[0.22em] text-ink-muted">
+      <nav aria-label="Ruta de navegación" class="flex items-center gap-2.5">
+        <a href="/" class="hover:text-rose-dark link-editorial">Inicio</a>
+        <span class="text-gold-metallic">/</span>
+        <a href="/procedimientos" class="hover:text-rose-dark link-editorial">Procedimientos</a>
+        <span class="text-gold-metallic">/</span>
+        <a
+          href={`/procedimientos?categoria=${proc.categorySlug}`}
+          class="hover:text-rose-dark link-editorial hidden sm:inline"
+        >
+          {proc.categoryName}
+        </a>
+        <span class="text-gold-metallic hidden sm:inline">/</span>
+        <span class="text-rose-dark font-medium">{proc.shortName}</span>
+      </nav>
+
+      <a
+        href="/procedimientos"
+        class="inline-flex items-center gap-1.5 text-rose-dark hover:text-gold-deep link-editorial"
+      >
+        <span aria-hidden="true">←</span>
+        <span>Volver al Catálogo</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- 2. EDITORIAL SPLIT HERO OF THE PROCEDURE -->
+  <section class="w-full py-14 lg:py-22 bg-ivory-pure">
+    <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <!-- Left High-Aesthetic Portrait (5 cols) -->
+        <div class="lg:col-span-5" data-reveal>
+          <div class="relative aspect-[4/5] w-full overflow-hidden bg-rose-blush border border-gold-border/75">
+            <img
+              src={proc.image}
+              alt={proc.name}
+              width="760"
+              height="920"
+              fetchpriority="high"
+              class="w-full h-full object-cover object-center"
+            />
+            <div class="absolute top-4 left-4 bg-ivory-pure/95 backdrop-blur-sm px-3.5 py-1.5 border border-gold-border/70 text-[9.5px] font-medium uppercase tracking-[0.22em] text-rose-dark">
+              {proc.categoryName}
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Procedure Overview & Key Specs (7 cols) -->
+        <div class="lg:col-span-7 space-y-7" data-reveal>
+          <div class="space-y-3">
+            <span class="text-[10.5px] font-medium uppercase tracking-widecaps text-gold-deep block">
+              {proc.specialist}
+            </span>
+            <h1 class="text-[34px] sm:text-[48px] lg:text-[54px] font-extralight leading-[1.06] tracking-[-0.025em] text-rose-dark">
+              {proc.name}
+            </h1>
+            <p class="text-[16px] sm:text-[17.5px] text-rose-deep font-light leading-relaxed pt-1">
+              {proc.summary}
+            </p>
+          </div>
+
+          <p class="text-[14.5px] sm:text-[15px] text-ink-muted leading-relaxed">
+            {proc.clinicalDetail}
+          </p>
+
+          <!-- Clinical Specifications Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-y border-gold-border/70 py-6">
+            <div>
+              <span class="text-[9.5px] font-medium uppercase tracking-[0.22em] text-gold-deep block">
+                Duración de Sesión
+              </span>
+              <span class="text-[16px] font-light text-rose-dark mt-1 block">
+                {proc.duration}
+              </span>
+            </div>
+            <div>
+              <span class="text-[9.5px] font-medium uppercase tracking-[0.22em] text-gold-deep block">
+                Recuperación
+              </span>
+              <span class="text-[16px] font-light text-rose-dark mt-1 block">
+                {proc.recovery}
+              </span>
+            </div>
+            <div>
+              <span class="text-[9.5px] font-medium uppercase tracking-[0.22em] text-gold-deep block">
+                Zonas de Aplicación
+              </span>
+              <span class="text-[14px] font-light text-rose-dark mt-1 block leading-snug">
+                {proc.zones}
+              </span>
+            </div>
+          </div>
+
+          <!-- Primary CTA Actions -->
+          <div class="pt-2 flex flex-wrap items-center gap-4">
+            <a
+              href={`https://wa.me/${CLINIC_INFO.whatsappPrimaryNumber}?text=${waMessage}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-atelier inline-flex items-center justify-center gap-3 px-9 py-4 bg-rose-dark text-ivory-pure text-[10.5px] font-medium uppercase tracking-[0.26em] hover:bg-gold-metallic hover:text-rose-espresso"
+            >
+              <span>Agendar por WhatsApp</span>
+              <span aria-hidden="true">→</span>
+            </a>
+
+            <button
+              type="button"
+              data-open-booking
+              data-procedure={proc.name}
+              class="btn-atelier inline-flex items-center justify-center px-8 py-4 border border-rose-dark text-rose-dark text-[10.5px] font-medium uppercase tracking-[0.26em] hover:bg-rose-dark hover:text-ivory-pure"
+            >
+              Solicitar Evaluación
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. DESCRIPCIÓN DEL PROCESO PASO A PASO -->
+  <section class="w-full py-18 lg:py-24 bg-ivory border-t border-gold-border/70">
+    <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="max-w-2xl space-y-2.5 mb-12" data-reveal>
+        <span class="text-[10px] font-medium uppercase tracking-widecaps text-gold-deep block">
+          Protocolo Clínico Paso a Paso
+        </span>
+        <h2 class="text-[30px] sm:text-[40px] font-extralight text-rose-dark tracking-[-0.02em] leading-tight">
+          ¿Cómo se realiza el procedimiento?
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-7">
+        {proc.processSteps.map((step) => (
+          <div
+            class="bg-ivory-pure border border-gold-border/80 p-8 flex flex-col justify-between space-y-5"
+            data-reveal
+          >
+            <div class="space-y-3">
+              <span class="text-[36px] font-extralight text-gold-metallic leading-none block">
+                {step.step}
+              </span>
+              <h3 class="text-[20px] font-light text-rose-dark leading-snug">
+                {step.title}
+              </h3>
+              <p class="text-[14px] text-ink-muted leading-relaxed">
+                {step.detail}
+              </p>
+            </div>
+            <div class="pt-3 border-t border-gold-border/50 text-[9.5px] uppercase tracking-[0.22em] text-rose-old">
+              Supervisión Médica Rejuveness
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. ¿QUÉ INCLUYE EL TRATAMIENTO? & BENEFICIOS CLÍNICOS -->
+  <section class="w-full py-18 lg:py-24 bg-ivory-pure border-t border-gold-border/70">
+    <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch">
+        <!-- Left: What the Treatment Includes (7 cols) -->
+        <div
+          class="lg:col-span-7 bg-ivory border border-gold-border/80 p-8 sm:p-11 flex flex-col justify-between space-y-8"
+          data-reveal
+        >
+          <div class="space-y-6">
+            <div class="space-y-2 pb-5 border-b border-gold-border/70">
+              <span class="text-[10px] font-medium uppercase tracking-widecaps text-gold-deep block">
+                Detalle de tu Sesión
+              </span>
+              <h2 class="text-[28px] sm:text-[34px] font-extralight text-rose-dark tracking-[-0.02em]">
+                ¿Qué incluye este tratamiento?
+              </h2>
+            </div>
+
+            <ul class="space-y-4">
+              {proc.includes.map((item, idx) => (
+                <li class="flex items-start gap-4">
+                  <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center border border-gold-metallic text-[10px] font-medium text-gold-deep bg-ivory-pure">
+                    0{idx + 1}
+                  </span>
+                  <span class="text-[14.5px] sm:text-[15px] text-ink leading-relaxed">
+                    {item}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Post-Care Note -->
+          <div class="p-5 bg-ivory-pure border-l-2 border-gold-metallic space-y-1">
+            <span class="text-[10px] font-medium uppercase tracking-[0.22em] text-gold-deep block">
+              Cuidados Posteriores Recomendados
+            </span>
+            <p class="text-[13.5px] text-ink-muted leading-relaxed">
+              {proc.postCare}
+            </p>
+          </div>
+        </div>
+
+        <!-- Right: Key Benefits & Direct Appointment Box (5 cols) -->
+        <div
+          class="lg:col-span-5 bg-rose-blush/65 border border-gold-border/80 p-8 sm:p-11 flex flex-col justify-between space-y-8"
+          data-reveal
+        >
+          <div class="space-y-6">
+            <div class="space-y-2 pb-5 border-b border-gold-border/70">
+              <span class="text-[10px] font-medium uppercase tracking-widecaps text-gold-deep block">
+                Resultados Esperados
+              </span>
+              <h2 class="text-[28px] sm:text-[34px] font-extralight text-rose-dark tracking-[-0.02em]">
+                Beneficios Principales
+              </h2>
+            </div>
+
+            <ul class="space-y-4">
+              {proc.benefits.map((benefit) => (
+                <li class="flex items-start gap-3.5">
+                  <span class="text-gold-deep mt-1 shrink-0">✦</span>
+                  <span class="text-[14.5px] text-rose-dark leading-relaxed">
+                    {benefit}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="pt-6 border-t border-gold-border/70 space-y-4">
+            <p class="text-[13px] text-ink-muted leading-relaxed">
+              ¿Deseas conocer cuántas sesiones necesita tu piel? Agenda tu evaluación médica en Colonia Maquilishuat.
+            </p>
+            <a
+              href={`https://wa.me/${CLINIC_INFO.whatsappPrimaryNumber}?text=${waMessage}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-atelier w-full inline-flex items-center justify-center gap-2 py-4 bg-rose-dark text-ivory-pure text-[10px] font-medium uppercase tracking-[0.26em] hover:bg-gold-metallic hover:text-rose-espresso"
+            >
+              <span>Consultar Disponibilidad en WhatsApp</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. PROCEDIMIENTOS RELACIONADOS -->
+  <section class="w-full py-18 lg:py-22 bg-ivory border-t border-gold-border/70">
+    <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="flex items-end justify-between gap-4 mb-10" data-reveal>
+        <div>
+          <span class="text-[10px] font-medium uppercase tracking-widecaps text-gold-deep block mb-1">
+            Continúa Explorando
+          </span>
+          <h2 class="text-[26px] sm:text-[32px] font-extralight text-rose-dark tracking-[-0.02em]">
+            Procedimientos Relacionados
+          </h2>
+        </div>
+        <a
+          href="/procedimientos"
+          class="text-[10px] font-medium uppercase tracking-[0.24em] text-rose-dark border-b border-gold-metallic pb-1 hover:text-gold-deep link-editorial"
+        >
+          Ver Todo el Menú →
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {fallbackRelated.map((rel) => (
+          <a
+            href={`/procedimientos/${rel.id}`}
+            class="group flex flex-col justify-between bg-ivory-pure border border-gold-border/70 p-4 hover:border-gold-metallic transition-colors"
+            data-reveal
+          >
+            <div>
+              <div class="relative aspect-[4/5] w-full overflow-hidden bg-rose-blush mb-4">
+                <img
+                  src={rel.image}
+                  alt={rel.name}
+                  width="500"
+                  height="550"
+                  loading="lazy"
+                  class="w-full h-full object-cover object-center portrait-zoom"
+                />
+              </div>
+              <span class="text-[9.5px] uppercase tracking-[0.2em] text-gold-deep block mb-1">
+                {rel.categoryName} · {rel.duration}
+              </span>
+              <h3 class="text-[18px] font-light text-rose-dark group-hover:text-rose-deep transition-colors">
+                {rel.name}
+              </h3>
+            </div>
+            <div class="pt-4 mt-3 border-t border-gold-border/50 flex items-center justify-between text-[10px] font-medium uppercase tracking-[0.22em] text-rose-dark">
+              <span>Ver Procedimiento</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

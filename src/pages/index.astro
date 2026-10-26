@@ -1,0 +1,337 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FaqSection from '../components/FaqSection.astro';
+import { CATEGORIES, PROCEDURES, SKIN_NEEDS } from '../data/clinicData';
+
+const featuredProcedures = PROCEDURES.filter((p) => p.featured).slice(0, 4);
+const heroCategories = CATEGORIES.slice(0, 4);
+---
+
+<BaseLayout
+  title="REJUVENESS CENTER · Clínica de Medicina Estética en San Salvador"
+  description="Clínica de rejuvenecimiento facial y moldeo corporal en Colonia Maquilishuat, San Salvador. Dirección médica de la Dra. Ingrid Gómez desde 2012."
+  currentPath="/"
+>
+  <!-- 1. HERO — Limpio y elegante con imagen protagonista (Referencia All Design) -->
+  <section class="relative w-full h-[85vh] min-h-[560px] max-h-[860px] flex items-center justify-center overflow-hidden bg-rose-nude">
+    <div class="absolute inset-0 z-0">
+      <img
+        src="/images/pexels/hero-facial.jpg"
+        alt="Rejuvenecimiento facial y armonía natural en Rejuveness Center"
+        width="1920"
+        height="1080"
+        fetchpriority="high"
+        class="w-full h-full object-cover object-center"
+      />
+      <div class="absolute inset-0 bg-[#281519]/32"></div>
+    </div>
+
+    <div class="relative z-10 w-full max-w-[1320px] mx-auto px-6 flex flex-col items-center text-center">
+      <h1
+        translate="no"
+        class="text-[50px] sm:text-[82px] md:text-[108px] lg:text-[126px] font-extralight leading-[0.95] tracking-[-0.03em] text-ivory-pure select-none"
+      >
+        Rejuveness Center
+      </h1>
+
+      <p class="mt-5 sm:mt-7 text-[10px] sm:text-[11px] font-normal uppercase tracking-[0.38em] text-ivory-pure/90">
+        MEDICINA ESTÉTICA · ARMONIZACIÓN FACIAL &amp; MOLDEO CORPORAL
+      </p>
+
+      <div class="mt-10 sm:mt-12">
+        <a
+          href="/procedimientos"
+          class="btn-atelier inline-block border border-ivory-pure/85 bg-rose-dark/35 backdrop-blur-sm px-12 py-3.5 text-[10px] font-medium uppercase tracking-[0.32em] text-ivory-pure hover:bg-ivory-pure hover:text-rose-dark"
+        >
+          Procedimientos
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. TIRA VISUAL DE 4 CATEGORÍAS (Referencia The Routine — Imágenes protagonistas) -->
+  <section aria-label="Especialidades" class="w-full py-12 sm:py-16 bg-ivory-pure">
+    <div class="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div
+        class="flex flex-col lg:flex-row w-full h-auto lg:h-[520px] gap-2"
+        data-category-strip
+      >
+        {heroCategories.map((cat, index) => (
+          <a
+            href={`/procedimientos?categoria=${cat.slug}`}
+            data-strip-panel
+            class={`group relative overflow-hidden h-[300px] lg:h-full transition-all duration-700 ease-out flex items-center justify-center p-6 ${
+              index === 0 ? 'lg:flex-[2.2]' : 'lg:flex-1'
+            }`}
+          >
+            <img
+              src={cat.image}
+              alt={cat.title}
+              width="900"
+              height="1000"
+              loading="lazy"
+              class={`strip-img absolute inset-0 w-full h-full object-cover object-center transition-all duration-700 ${
+                index === 0 ? 'grayscale-0 scale-100' : 'lg:grayscale group-hover:grayscale-0 group-hover:scale-105'
+              }`}
+            />
+            <div class="absolute inset-0 bg-rose-espresso/30 group-hover:bg-rose-espresso/20 transition-colors duration-500"></div>
+
+            <!-- Centered Minimal Label -->
+            <span class="relative z-10 text-[14px] sm:text-[15px] font-normal uppercase tracking-[0.3em] text-ivory-pure drop-shadow-sm">
+              {cat.shortLabel}
+            </span>
+
+            <!-- Bottom Subtle Action on Active/Hover -->
+            <div
+              class={`strip-details absolute bottom-6 inset-x-6 flex items-center justify-between text-[10px] uppercase tracking-[0.24em] text-ivory-pure/95 border-t border-ivory-pure/30 pt-3 transition-all duration-500 ${
+                index === 0 ? 'opacity-100' : 'lg:opacity-0 group-hover:opacity-100'
+              }`}
+            >
+              <span class="truncate pr-3">{cat.subtitle}</span>
+              <span class="text-gold-light shrink-0">Explorar →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. SECCIÓN DIAGNÓSTICA MINIMALISTA: "Comienza con lo que tu piel necesita" -->
+  <section class="w-full py-12 lg:py-20 bg-ivory-pure">
+    <div class="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+        <!-- Fotografía cuadrada/vertical izquierda -->
+        <div class="lg:col-span-5" data-reveal>
+          <div class="relative aspect-[4/5] w-full overflow-hidden bg-rose-blush">
+            <img
+              id="skin-need-preview-img"
+              src="/images/pexels/skin-needs-portrait.jpg"
+              alt="Cuidado médico de la piel en Rejuveness Center"
+              width="760"
+              height="820"
+              loading="lazy"
+              class="w-full h-full object-cover object-center transition-opacity duration-300"
+            />
+          </div>
+        </div>
+
+        <!-- Lista limpia derecha (estilo referencia.webp) -->
+        <div class="lg:col-span-7 space-y-8" data-reveal>
+          <div class="space-y-2.5 max-w-md">
+            <h2 class="text-[28px] sm:text-[36px] font-extralight leading-[1.15] tracking-[-0.02em] text-rose-dark">
+              Comienza con lo que tu piel necesita
+            </h2>
+            <p class="text-[13.5px] text-ink-muted leading-relaxed">
+              Tratamientos médicos no invasivos bajo la dirección de la Dra. Ingrid Gómez.
+            </p>
+          </div>
+
+          <div class="border-t border-gold-border/70 divide-y divide-gold-border/70">
+            {SKIN_NEEDS.map((need) => (
+              <a
+                href={need.href}
+                data-need-item
+                data-image={need.image}
+                class="group py-4 sm:py-5 flex items-center justify-between gap-4 hover:pl-2 transition-all duration-300"
+              >
+                <span class="text-[15.5px] sm:text-[17px] font-light text-rose-dark group-hover:text-rose-deep transition-colors">
+                  {need.title}
+                </span>
+                <span
+                  class="text-[16px] text-rose-old group-hover:text-gold-deep group-hover:translate-x-1 transition-all shrink-0"
+                  aria-hidden="true"
+                >
+                  →
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. BANNER EDITORIAL PANORÁMICO (Referencia The Routine) -->
+  <section class="w-full px-5 sm:px-8 lg:px-12 py-6 bg-ivory-pure">
+    <div
+      class="max-w-[1380px] mx-auto relative h-[440px] sm:h-[520px] w-full overflow-hidden bg-rose-old"
+      data-reveal
+    >
+      <img
+        src="/images/pexels/banner-harmony.jpg"
+        alt="Armonización facial progresiva y luminosidad cutánea"
+        width="1600"
+        height="900"
+        loading="lazy"
+        class="w-full h-full object-cover object-center"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-[#341C21]/80 via-[#341C21]/20 to-transparent"></div>
+
+      <div class="absolute inset-x-0 bottom-10 sm:bottom-12 px-6 flex flex-col items-center text-center">
+        <h2 class="text-[24px] sm:text-[34px] font-extralight text-ivory-pure tracking-[-0.02em] max-w-xl leading-snug">
+          Encontremos el protocolo ideal para la armonía de tu rostro
+        </h2>
+        <div class="mt-6">
+          <button
+            type="button"
+            data-open-booking
+            class="btn-atelier border border-ivory-pure/80 bg-rose-dark/35 backdrop-blur-sm px-9 py-3 text-[10px] font-medium uppercase tracking-[0.26em] text-ivory-pure hover:bg-ivory-pure hover:text-rose-dark"
+          >
+            Agendar Evaluación
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. TRATAMIENTOS DESTACADOS (4 Columnas Limpias estilo "Bestseller") -->
+  <section class="w-full py-16 lg:py-24 bg-ivory-pure">
+    <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="flex items-end justify-between gap-4 mb-10" data-reveal>
+        <h2 class="text-[26px] sm:text-[34px] font-extralight text-rose-dark tracking-[-0.02em]">
+          Tratamientos Destacados
+        </h2>
+        <a
+          href="/procedimientos"
+          class="text-[10px] font-medium uppercase tracking-[0.24em] text-rose-dark border-b border-gold-metallic pb-1 hover:text-gold-deep link-editorial"
+        >
+          Ver Todos →
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {featuredProcedures.map((proc) => (
+          <a
+            href={`/procedimientos/${proc.id}`}
+            class="group flex flex-col justify-between bg-ivory border border-gold-border/60 p-3.5 transition-colors hover:border-gold-metallic"
+            data-reveal
+          >
+            <div>
+              <div class="relative aspect-[4/5] w-full overflow-hidden bg-rose-blush/40 mb-4">
+                <img
+                  src={proc.image}
+                  alt={proc.name}
+                  width="500"
+                  height="600"
+                  loading="lazy"
+                  class="w-full h-full object-cover object-center portrait-zoom"
+                />
+              </div>
+
+              <div class="flex items-center justify-between text-[9.5px] text-gold-deep uppercase tracking-[0.2em] mb-1">
+                <span>{proc.categoryName}</span>
+                <span>{proc.duration}</span>
+              </div>
+
+              <h3 class="text-[16px] font-normal text-rose-dark group-hover:text-rose-deep transition-colors">
+                {proc.shortName}
+              </h3>
+            </div>
+
+            <div class="pt-4">
+              <span
+                class="btn-atelier w-full py-2.5 border border-rose-dark/75 bg-ivory-pure text-[9.5px] font-medium uppercase tracking-[0.24em] text-rose-dark group-hover:bg-rose-dark group-hover:text-ivory-pure flex items-center justify-center gap-1.5"
+              >
+                <span>Ver Procedimiento</span>
+                <span aria-hidden="true" class="group-hover:translate-x-0.5 transition-transform">→</span>
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. FRANJA NUDE ROSADO COMPACTA (4 Pilares estilo referencia.webp) -->
+  <section class="w-full py-14 bg-rose-blush border-y border-gold-border/60">
+    <div class="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="text-center mb-10" data-reveal>
+        <h2 class="text-[22px] sm:text-[26px] font-light text-rose-dark tracking-[-0.015em]">
+          La excelencia médica de Rejuveness Center
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+        <div class="space-y-1.5" data-reveal>
+          <div class="mx-auto w-10 h-10 rounded-full bg-rose-nude/80 border border-gold-metallic/40 flex items-center justify-center text-rose-dark">
+            <span class="text-[13px] font-medium">01</span>
+          </div>
+          <h3 class="text-[13.5px] font-medium text-rose-dark">Dra. Ingrid Gómez</h3>
+          <p class="text-[11.5px] text-ink-muted">Certificación en Miami y Barcelona</p>
+        </div>
+
+        <div class="space-y-1.5" data-reveal>
+          <div class="mx-auto w-10 h-10 rounded-full bg-rose-nude/80 border border-gold-metallic/40 flex items-center justify-center text-rose-dark">
+            <span class="text-[13px] font-medium">02</span>
+          </div>
+          <h3 class="text-[13.5px] font-medium text-rose-dark">Armonía Natural</h3>
+          <p class="text-[11.5px] text-ink-muted">Resultados progresivos sin excesos</p>
+        </div>
+
+        <div class="space-y-1.5" data-reveal>
+          <div class="mx-auto w-10 h-10 rounded-full bg-rose-nude/80 border border-gold-metallic/40 flex items-center justify-center text-rose-dark">
+            <span class="text-[13px] font-medium">03</span>
+          </div>
+          <h3 class="text-[13.5px] font-medium text-rose-dark">Sin Incapacidad</h3>
+          <p class="text-[11.5px] text-ink-muted">Retorno inmediato a tu rutina</p>
+        </div>
+
+        <div class="space-y-1.5" data-reveal>
+          <div class="mx-auto w-10 h-10 rounded-full bg-rose-nude/80 border border-gold-metallic/40 flex items-center justify-center text-rose-dark">
+            <span class="text-[13px] font-medium">04</span>
+          </div>
+          <h3 class="text-[13.5px] font-medium text-rose-dark">Turismo Médico</h3>
+          <p class="text-[11.5px] text-ink-muted">Atención bilingüe en San Salvador</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. PREGUNTAS FRECUENTES (Exclusivamente en Inicio) -->
+  <FaqSection bgClass="bg-ivory" />
+</BaseLayout>
+
+<script>
+  function initHomeInteractions() {
+    const strip = document.querySelector('[data-category-strip]');
+    if (strip) {
+      const panels = strip.querySelectorAll('[data-strip-panel]');
+      panels.forEach((panel) => {
+        panel.addEventListener('mouseenter', () => {
+          if (window.innerWidth < 1024) return;
+          panels.forEach((p) => {
+            p.classList.remove('lg:flex-[2.2]');
+            p.classList.add('lg:flex-1');
+            const img = p.querySelector('.strip-img');
+            const details = p.querySelector('.strip-details');
+            img?.classList.add('lg:grayscale');
+            details?.classList.add('lg:opacity-0');
+            details?.classList.remove('opacity-100');
+          });
+
+          panel.classList.remove('lg:flex-1');
+          panel.classList.add('lg:flex-[2.2]');
+          const activeImg = panel.querySelector('.strip-img');
+          const activeDetails = panel.querySelector('.strip-details');
+          activeImg?.classList.remove('lg:grayscale');
+          activeDetails?.classList.remove('lg:opacity-0');
+          activeDetails?.classList.add('opacity-100');
+        });
+      });
+    }
+
+    const previewImg = document.getElementById('skin-need-preview-img') as HTMLImageElement | null;
+    const needItems = document.querySelectorAll('[data-need-item]');
+    needItems.forEach((item) => {
+      item.addEventListener('mouseenter', () => {
+        const imgUrl = item.getAttribute('data-image');
+        if (previewImg && imgUrl && previewImg.getAttribute('src') !== imgUrl) {
+          previewImg.src = imgUrl;
+        }
+      });
+    });
+  }
+
+  initHomeInteractions();
+  document.addEventListener('astro:page-load', initHomeInteractions);
+</script>

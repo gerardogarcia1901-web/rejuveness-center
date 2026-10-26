@@ -1,0 +1,46 @@
+---
+interface Props {
+  size?: 'sm' | 'md' | 'lg';
+  variant?: 'light' | 'dark';
+}
+
+const { size = 'md', variant = 'dark' } = Astro.props;
+
+const dimensions = {
+  sm: 'w-9 h-9',
+  md: 'w-11 h-11',
+  lg: 'w-14 h-14',
+}[size];
+
+const strokeColor = variant === 'light' ? '#F5E8E6' : '#341C21';
+const accentColor = '#C5A059';
+---
+
+<div
+  class={`relative flex items-center justify-center shrink-0 border border-gold-border/80 bg-ivory-pure/90 ${dimensions} transition-colors duration-300 group-hover:border-gold-metallic`}
+  aria-hidden="true"
+>
+  <!-- Vector recreation of the official Rejuveness Center circular-R monogram -->
+  <svg
+    viewBox="0 0 100 100"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    class="w-[72%] h-[72%]"
+  >
+    <!-- Outer open circle + horizontal middle bar forming the upper bowl of the R -->
+    <path
+      d="M 49 86 A 36 36 0 1 1 85 52 L 16 52"
+      stroke={strokeColor}
+      stroke-width="9.5"
+      stroke-linecap="butt"
+      stroke-linejoin="miter"
+    />
+    <!-- Diagonal R leg descending to bottom-right with subtle metallic gold accent -->
+    <path
+      d="M 53 52 L 73 81"
+      stroke={accentColor}
+      stroke-width="9.5"
+      stroke-linecap="butt"
+    />
+  </svg>
+</div>

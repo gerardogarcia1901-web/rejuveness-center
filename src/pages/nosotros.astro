@@ -1,0 +1,219 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { CLINIC_INFO } from '../data/clinicData';
+---
+
+<BaseLayout
+  title="Nosotros & Dra. Ingrid Gómez · REJUVENESS CENTER San Salvador"
+  description="Conoce la historia de Rejuveness Center desde 2012 en San Salvador bajo la dirección de la Dra. Ingrid Gómez, con certificaciones en Miami, Barcelona, Global Skin y Merz."
+  currentPath="/nosotros"
+>
+  <!-- 1. EDITORIAL HEADER & FULL-WIDTH CLINICAL PHOTOGRAPHY -->
+  <section class="w-full pt-14 pb-16 lg:py-24 bg-ivory">
+    <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="text-center max-w-4xl mx-auto space-y-5 mb-14" data-reveal>
+        <span class="text-[10.5px] font-medium uppercase tracking-widecaps text-gold-deep block">
+          Fundada en 2012 · San Salvador, El Salvador
+        </span>
+        <h1 class="text-[44px] sm:text-[68px] lg:text-[84px] font-extralight leading-[0.98] tracking-[-0.03em] text-rose-dark">
+          Quiénes Somos
+        </h1>
+        <p class="text-[15.5px] sm:text-[17px] text-ink-muted max-w-2xl mx-auto leading-relaxed">
+          Una década perfeccionando la armonización facial progresiva y la regeneración celular natural mediante tecnologías americanas de punta y rigor clínico.
+        </p>
+      </div>
+
+      <!-- Panoramic Clinical Interior / Treatment Image -->
+      <div class="relative aspect-[16/7] min-h-[300px] w-full overflow-hidden bg-rose-blush border border-gold-border/70" data-reveal>
+        <img
+          src="/images/pexels/clinica-interior.jpg"
+          alt="Atención médica especializada en Rejuveness Center Colonia Maquilishuat"
+          width="1440"
+          height="630"
+          class="w-full h-full object-cover object-center"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-rose-espresso/55 via-transparent to-transparent"></div>
+        <div class="absolute bottom-6 left-6 sm:bottom-8 sm:left-8 bg-ivory-pure/95 backdrop-blur-sm px-6 py-4 border border-gold-border">
+          <span class="text-[9.5px] uppercase tracking-[0.26em] text-gold-deep block">
+            Colonia Maquilishuat · Calle La Mascota #722
+          </span>
+          <p class="text-[14px] font-light text-rose-dark mt-0.5">
+            Una de las zonas corporativas y residenciales más exclusivas y seguras de San Salvador
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. DRA. INGRID GÓMEZ & HISTORIA DE LA CLÍNICA -->
+  <section class="w-full py-20 lg:py-28 bg-ivory-pure border-y border-gold-border/60">
+    <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-20 items-center">
+        <!-- Left Portrait + Floating Credential Card -->
+        <div class="lg:col-span-5 relative" data-reveal>
+          <div class="aspect-[4/5] w-full overflow-hidden bg-rose-blush border border-gold-border/70">
+            <img
+              src="/images/pexels/dra-clinica.jpg"
+              alt="Dirección Médica Dra. Ingrid Gómez en Rejuveness Center"
+              width="720"
+              height="900"
+              loading="lazy"
+              class="w-full h-full object-cover object-center"
+            />
+          </div>
+          <!-- Floating Alabaster/Blush Detail Box -->
+          <div class="hidden sm:block absolute -bottom-7 -right-7 bg-ivory p-7 border border-gold-metallic/70 max-w-xs shadow-[0_20px_50px_rgba(52,28,33,0.08)]">
+            <span class="text-[40px] font-extralight leading-none text-gold-deep block">
+              2012
+            </span>
+            <p class="text-[10px] font-medium uppercase tracking-[0.24em] text-rose-dark mt-2">
+              Año de Fundación bajo Dirección de la Dra. Ingrid Gómez
+            </p>
+          </div>
+        </div>
+
+        <!-- Right Editorial Story & International Certifications -->
+        <div class="lg:col-span-7 space-y-8" data-reveal>
+          <div class="space-y-3">
+            <span class="text-[10px] font-medium uppercase tracking-widecaps text-gold-deep block">
+              Dirección Médica & Trayectoria Internacional
+            </span>
+            <h2 class="text-[34px] sm:text-[46px] font-extralight leading-[1.12] text-rose-dark tracking-[-0.025em]">
+              Dra. Ingrid Gómez
+            </h2>
+            <p class="text-[13px] uppercase tracking-[0.22em] text-rose-old">
+              Especialista en Medicina Estética y Armonización Orofacial
+            </p>
+          </div>
+
+          <div class="space-y-4 text-[15px] text-ink-muted leading-relaxed">
+            <p>
+              <strong class="font-medium text-rose-dark">REJUVENESS CENTER</strong> nació en el año 2012 en San Salvador bajo la dirección de la <strong class="font-medium text-rose-dark">Dra. Ingrid Gómez</strong>, reconocida especialista en el área médica estética con formación continua y certificaciones internacionales otorgadas por instituciones de prestigio mundial.
+            </p>
+            <p>
+              Desde nuestros inicios, la clínica se ha diferenciado por <strong class="font-medium text-rose-dark">rechazar los cambios drásticos o artificiales</strong>, posicionando en su lugar la armonización facial progresiva y la regeneración celular natural mediante tecnologías americanas de punta.
+            </p>
+            <p>
+              Absolutamente todos los procedimientos médicos inyectables (Toxina Botulínica, Ácido Hialurónico Reticulado, Rinomodelación, Hilos Tensores PDO, Bioestimuladores Radiesse y Enzimas PB Serum) son aplicados directamente por la Dra. Ingrid Gómez o médicos certificados de su equipo.
+            </p>
+          </div>
+
+          <!-- 4 International Certifications Grid -->
+          <div class="pt-4 border-t border-gold-border/70">
+            <span class="text-[10px] font-medium uppercase tracking-editorial text-gold-deep block mb-5">
+              Certificaciones y Respaldo Académico Internacional
+            </span>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {CLINIC_INFO.certifications.map((cert) => (
+                <div class="p-5 bg-ivory border border-gold-border/70 space-y-1.5">
+                  <div class="flex items-center justify-between gap-2">
+                    <h3 class="text-[16px] font-normal text-rose-dark">
+                      {cert.institution}
+                    </h3>
+                    <span class="text-[9.5px] uppercase tracking-[0.2em] text-gold-deep">
+                      {cert.location}
+                    </span>
+                  </div>
+                  <p class="text-[12.5px] text-ink-muted leading-relaxed">
+                    {cert.focus}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="pt-2 flex flex-wrap items-center gap-4">
+            <button
+              type="button"
+              data-open-booking
+              class="btn-atelier inline-flex items-center justify-center px-9 py-4 bg-rose-dark text-ivory-pure text-[10.5px] font-medium uppercase tracking-[0.26em] hover:bg-gold-metallic hover:text-rose-espresso"
+            >
+              Agendar Evaluación con la Dra. Gómez
+            </button>
+            <a
+              href="/procedimientos"
+              class="btn-atelier inline-flex items-center justify-center px-9 py-4 border border-rose-dark/40 text-rose-dark text-[10.5px] font-medium uppercase tracking-[0.26em] hover:bg-rose-dark hover:text-ivory-pure"
+            >
+              Explorar Menú Médico
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. FILOSOFÍA CLÍNICA & IDENTIDAD DE MARCA (3 Pilares + Emblema Oficial) -->
+  <section class="w-full py-20 lg:py-28 bg-rose-blush/50">
+    <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div class="lg:col-span-5 space-y-6" data-reveal>
+          <span class="text-[10px] font-medium uppercase tracking-widecaps text-gold-deep block">
+            Ética & Rigor Clínico
+          </span>
+          <h2 class="text-[32px] sm:text-[44px] font-extralight leading-[1.12] text-rose-dark tracking-[-0.025em]">
+            Tres principios que guían cada tratamiento
+          </h2>
+          <p class="text-[14.5px] text-ink-muted leading-relaxed">
+            Nuestra prioridad es cuidar la salud integral de tu piel y respetar la anatomía única de tu rostro, empleando únicamente insumos aprobados por organismos internacionales de salud.
+          </p>
+
+          <!-- Official 3D Brand Sign Showcase Card -->
+          <div class="p-4 bg-ivory-pure border border-gold-border/80 space-y-3">
+            <div class="aspect-[16/9] w-full overflow-hidden bg-ivory">
+              <img
+                src="/images/logo-original.png"
+                alt="Insignia institucional de REJUVENESS Center Clínica de Rejuvenecimiento Facial y Moldeo Corporal"
+                width="640"
+                height="360"
+                loading="lazy"
+                class="w-full h-full object-cover object-center"
+              />
+            </div>
+            <div class="flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-ink-muted px-1">
+              <span>Identidad Institucional</span>
+              <span class="text-gold-deep">Desde 2012 · San Salvador</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 grid grid-cols-1 gap-6" data-reveal>
+          <div class="p-8 bg-ivory-pure border border-gold-border/80 space-y-2.5">
+            <span class="text-[10px] font-medium uppercase tracking-[0.26em] text-gold-deep block">
+              Pilar I · Naturalidad Progresiva
+            </span>
+            <h3 class="text-[22px] font-light text-rose-dark">
+              Armonización Facial sin Rasgos Artificiales
+            </h3>
+            <p class="text-[14.5px] text-ink-muted leading-relaxed">
+              Rechazamos las sobrecorrecciones. Cada aplicación de toxina botulínica, ácido hialurónico o bioestimuladores está calibrada para refrescar la expresión y devolver soporte anatómico de forma sutil y elegante.
+            </p>
+          </div>
+
+          <div class="p-8 bg-ivory-pure border border-gold-border/80 space-y-2.5">
+            <span class="text-[10px] font-medium uppercase tracking-[0.26em] text-gold-deep block">
+              Pilar II · Biotecnología Celular & Americana
+            </span>
+            <h3 class="text-[22px] font-light text-rose-dark">
+              Regeneración Dérmica de Vanguardia
+            </h3>
+            <p class="text-[14.5px] text-ink-muted leading-relaxed">
+              Integramos polinucleótidos de ADN de Salmón (PDRN), Exosomas y Plasma Rico en Plaquetas junto con aparatología americana de alta gama (HIFU, Radiofrecuencia Fraccionada Gold e IPL) para restaurar la piel desde sus capas profundas.
+            </p>
+          </div>
+
+          <div class="p-8 bg-ivory-pure border border-gold-border/80 space-y-2.5">
+            <span class="text-[10px] font-medium uppercase tracking-[0.26em] text-gold-deep block">
+              Pilar III · Turismo Médico Bilingüe
+            </span>
+            <h3 class="text-[22px] font-light text-rose-dark">
+              Atención Internacional en Colonia Maquilishuat
+            </h3>
+            <p class="text-[14.5px] text-ink-muted leading-relaxed">
+              Contamos con personal bilingüe y protocolos ambulatorios sin tiempo de incapacidad, permitiendo que pacientes que viajan desde el extranjero realicen sus tratamientos con total comodidad, coordinando su agenda vía WhatsApp con 2 a 3 semanas de anticipación.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
